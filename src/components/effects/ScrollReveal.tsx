@@ -49,8 +49,9 @@ export function StaggerReveal({
     <motion.div
       className={className}
       initial="hidden"
-      whileInView="show"
+      animate="show"
       viewport={{ once: true, amount: 0.15 }}
+      whileInView="show"
       variants={{
         hidden: {},
         show: { transition: { staggerChildren: stagger, delayChildren: 0.05 } },

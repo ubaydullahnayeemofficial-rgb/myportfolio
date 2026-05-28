@@ -110,9 +110,17 @@ export function GalleryClient({
       <section className="section-pad">
         <div className="container-page">
           {tab === "images" ? (
-            <ImageGrid items={pageSlice as GalleryImage[]} onOpen={setLightboxImage} />
+            <ImageGrid
+              key={`images-${safePage}`}
+              items={pageSlice as GalleryImage[]}
+              onOpen={setLightboxImage}
+            />
           ) : (
-            <VideoGrid items={pageSlice as YouTubeVideo[]} onOpen={setActiveVideo} />
+            <VideoGrid
+              key={`videos-${safePage}`}
+              items={pageSlice as YouTubeVideo[]}
+              onOpen={setActiveVideo}
+            />
           )}
 
           {dataset.length > PAGE_SIZE && (
