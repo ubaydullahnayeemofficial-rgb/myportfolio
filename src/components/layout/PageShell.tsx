@@ -6,6 +6,8 @@ import { CustomCursor } from "@/components/effects/CustomCursor";
 import { NoiseOverlay } from "@/components/effects/NoiseOverlay";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollToTop } from "@/components/shared/ScrollToTop";
+import { WhatsAppFab } from "@/components/shared/WhatsAppFab";
 import { Toaster } from "sonner";
 import type { ReactNode } from "react";
 
@@ -20,7 +22,9 @@ export function PageShell({ children }: { children: ReactNode }) {
           {children}
         </main>
         <Footer />
-        <Toaster position="bottom-right" theme="light" />
+        <WhatsAppFab />
+        <ScrollToTop />
+        <Toaster position="top-center" theme="light" />
       </LenisProvider>
     </ThemeProvider>
   );

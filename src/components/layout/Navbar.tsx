@@ -33,7 +33,7 @@ export function Navbar() {
         className={cn(
           "fixed top-0 inset-x-0 z-50 transition-all duration-500",
           scrolled
-            ? "py-3 backdrop-blur-xl bg-paper/75 border-b border-border/60"
+            ? "py-3 backdrop-blur-xl bg-paper/75"
             : "py-5 bg-transparent",
         )}
       >

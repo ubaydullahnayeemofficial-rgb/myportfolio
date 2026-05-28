@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { MessageCircle, Mail, Phone, MapPin } from "lucide-react";
 import { FacebookIcon, YoutubeIcon, InstagramIcon } from "@/components/shared/SocialIcons";
 import { buildMetadata } from "@/lib/seo";
@@ -50,6 +51,22 @@ export default function ContactPage() {
         <div className="container-page grid lg:grid-cols-12 gap-12">
           {/* Channels */}
           <ScrollReveal className="lg:col-span-5">
+            <div className="flex items-center gap-4 mb-8 p-4 rounded-card-lg bg-paper border border-border">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-emerald/40 shrink-0">
+                <Image
+                  src="/main.jpeg"
+                  alt="Ubaydullah Nayeem"
+                  fill
+                  sizes="64px"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-[10px] tracking-[0.22em] uppercase text-ink-muted">Replies come from</p>
+                <p className="font-display text-lg tracking-tight mt-0.5">{site.name}</p>
+                <p className="font-bn text-sm text-emerald">{site.nameBn}</p>
+              </div>
+            </div>
             <h2 className="font-display text-3xl md:text-4xl tracking-tight leading-tight">
               Where to find us.
             </h2>

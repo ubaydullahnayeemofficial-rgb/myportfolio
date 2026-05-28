@@ -13,7 +13,7 @@ type PageMeta = {
 export function buildMetadata({ title, description, path = "/", ogImage }: PageMeta): Metadata {
   const url = new URL(path, baseUrl).toString();
   const desc = description ?? site.tagline;
-  const image = ogImage ?? "/og.png";
+  const image = ogImage ?? "/main.jpeg";
 
   return {
     title,
@@ -25,7 +25,7 @@ export function buildMetadata({ title, description, path = "/", ogImage }: PageM
       siteName: site.name,
       title,
       description: desc,
-      images: [{ url: image, width: 1200, height: 630, alt: title }],
+      images: [{ url: image, width: 1080, height: 1080, alt: title }],
     },
     twitter: {
       card: "summary_large_image",

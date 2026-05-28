@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
@@ -79,11 +80,30 @@ export default async function BlogIndexPage() {
                   </span>
                 </div>
                 <div className="lg:col-span-5 order-1 lg:order-2">
-                  <div className="aspect-[4/5] rounded-card-lg overflow-hidden relative bg-gradient-to-br from-emerald via-emerald-bright to-gold flex items-end p-8">
-                    <ArabesqueBackdrop className="text-paper opacity-30" />
-                    <div className="relative text-paper">
-                      <div className="font-display text-7xl md:text-8xl leading-none">{featured.reading_minutes}</div>
-                      <div className="mt-1 text-xs tracking-[0.2em] uppercase">min read</div>
+                  <div className="aspect-[4/5] rounded-card-lg overflow-hidden relative ring-1 ring-border shadow-card group-hover:shadow-card-hover transition-shadow duration-500">
+                    <Image
+                      src="/1.jpg"
+                      alt="A scene from a public lecture"
+                      fill
+                      sizes="(min-width: 1024px) 420px, 90vw"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div
+                      aria-hidden
+                      className="absolute inset-0 bg-gradient-to-t from-emerald-deep/85 via-emerald-deep/30 to-transparent"
+                    />
+                    <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-paper flex items-end justify-between">
+                      <div>
+                        <div className="font-display text-6xl md:text-7xl leading-none">
+                          {featured.reading_minutes}
+                        </div>
+                        <div className="mt-1 text-[10px] tracking-[0.22em] uppercase opacity-80">
+                          min read
+                        </div>
+                      </div>
+                      <span className="text-[10px] tracking-[0.22em] uppercase opacity-80">
+                        From the journal
+                      </span>
                     </div>
                   </div>
                 </div>

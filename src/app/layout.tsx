@@ -61,13 +61,20 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — Mu'allim & Porichalok`,
     description: site.tagline,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: site.name }],
+    images: [
+      {
+        url: "/main.jpeg",
+        width: 1080,
+        height: 1080,
+        alt: `${site.name} — Mu'allim & Porichalok of Baitul Quran wa Assunnah Madrasah`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: site.name,
     description: site.tagline,
-    images: ["/og.png"],
+    images: ["/main.jpeg"],
   },
   alternates: { canonical: "/" },
   robots: {

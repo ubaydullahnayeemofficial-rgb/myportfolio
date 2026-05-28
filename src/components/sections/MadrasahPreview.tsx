@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, GraduationCap, Users, BookMarked, Heart } from "lucide-react";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/effects/ScrollReveal";
@@ -13,8 +14,30 @@ export function MadrasahPreview() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container-page">
-        <div className="grid lg:grid-cols-12 gap-12 items-end mb-16">
-          <div className="lg:col-span-7">
+        <div className="grid lg:grid-cols-12 gap-12 items-stretch mb-16">
+          <ScrollReveal className="lg:col-span-5">
+            <div className="relative aspect-[4/5] lg:aspect-[4/4.6] rounded-card-lg overflow-hidden ring-1 ring-border shadow-card">
+              <Image
+                src="/1.jpg"
+                alt="Ubaydullah Nayeem at a public lecture"
+                fill
+                sizes="(min-width: 1024px) 40vw, 90vw"
+                className="object-cover"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-gradient-to-t from-emerald-deep/70 via-emerald-deep/10 to-transparent"
+              />
+              <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-paper">
+                <p className="text-[10px] tracking-[0.22em] uppercase opacity-80">From the minbar</p>
+                <p className="font-display italic-display text-2xl md:text-3xl mt-2 leading-snug text-gold-bright">
+                  &ldquo;The Quran sets the rhythm. Everything else is downstream.&rdquo;
+                </p>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          <div className="lg:col-span-7 flex flex-col justify-end">
             <ScrollReveal>
               <span className="kicker">The Madrasah</span>
             </ScrollReveal>
@@ -23,10 +46,8 @@ export function MadrasahPreview() {
                 A school built around <span className="italic-display gradient-text">tilawah</span>, not the other way around.
               </h2>
             </ScrollReveal>
-          </div>
-          <div className="lg:col-span-5">
             <ScrollReveal delay={0.15}>
-              <p className="text-lg text-ink-soft leading-relaxed pretty">{madrasah.intro}</p>
+              <p className="mt-8 text-lg text-ink-soft leading-relaxed pretty max-w-xl">{madrasah.intro}</p>
             </ScrollReveal>
             <ScrollReveal delay={0.25}>
               <Link
