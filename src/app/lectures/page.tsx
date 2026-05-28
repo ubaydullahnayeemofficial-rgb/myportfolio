@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { Play, ExternalLink } from "lucide-react";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, collectionPageSchema, videoObjectSchema } from "@/lib/seo";
 import { fetchYouTubeVideos } from "@/lib/youtube";
 import { site } from "@/lib/site";
 import { GradientBlob } from "@/components/effects/GradientBlob";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/effects/ScrollReveal";
 import { L } from "@/components/shared/L";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 
 export const metadata: Metadata = buildMetadata({
   title: "Lectures",
   description:
-    "Lectures, tilawah, and qira'at sessions from the Ubaydullah Nayeem Official YouTube channel.",
+    "Lectures, tilawah, and qira'at sessions from the Ubaydullah Nayeem Official YouTube channel — full sessions, recitations, and reflections.",
   path: "/lectures",
 });
 
@@ -23,6 +25,19 @@ export default async function LecturesPage() {
 
   return (
     <>
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Lectures — Ubaydullah Nayeem",
+          description:
+            "Recorded lectures, tilawah, qira'at and dars from Ubaydullah Nayeem's YouTube channel.",
+          path: "/lectures",
+          numberOfItems: videos.length,
+        })}
+      />
+      {fullVideos.slice(0, 5).map((v) => (
+        <JsonLd key={v.id} data={videoObjectSchema(v)} />
+      ))}
+      <Breadcrumbs items={[{ name: "Lectures", nameBn: "ওয়াজ", href: "/lectures" }]} />
       {/* Hero */}
       <section className="relative section-pad overflow-hidden">
         <GradientBlob tone="emerald" size="xl" opacity={0.12} className="-top-32 -left-32" />

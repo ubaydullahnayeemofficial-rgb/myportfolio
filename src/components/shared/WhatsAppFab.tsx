@@ -33,10 +33,11 @@ export function WhatsAppFab() {
               <div className="flex items-start gap-3">
                 <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-gold-bright/60 shrink-0">
                   <Image
-                    src="/main.jpeg"
+                    src="/main.webp"
                     alt="Ubaydullah Nayeem"
                     fill
                     sizes="48px"
+                    loading="lazy"
                     className="object-cover"
                   />
                 </div>

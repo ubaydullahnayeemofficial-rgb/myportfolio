@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Check } from "lucide-react";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, faqSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { site } from "@/lib/site";
 import { madrasah } from "@/lib/data/madrasah";
 import { faqs } from "@/lib/data/faqs";
@@ -19,6 +21,10 @@ export const metadata: Metadata = buildMetadata({
 export default function MadrasahPage() {
   return (
     <>
+      <JsonLd
+        data={faqSchema(faqs.map((f) => ({ q: f.q, a: f.a })))}
+      />
+      <Breadcrumbs items={[{ name: "Madrasah", nameBn: "মাদরাসা", href: "/madrasah" }]} />
       {/* Hero */}
       <section className="relative section-pad overflow-hidden">
         <GradientBlob tone="emerald" size="xl" opacity={0.14} className="-top-32 -right-32" />

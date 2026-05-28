@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { blurFor } from "@/lib/blurs";
 import { MessageCircle, Mail, Phone, MapPin } from "lucide-react";
 import { FacebookIcon, YoutubeIcon, WhatsAppIcon } from "@/components/shared/SocialIcons";
 import { buildMetadata } from "@/lib/seo";
@@ -9,6 +10,7 @@ import { ArabesqueBackdrop } from "@/components/effects/ArabesqueBackdrop";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { MagneticButton } from "@/components/effects/MagneticButton";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
@@ -20,6 +22,7 @@ export const metadata: Metadata = buildMetadata({
 export default function ContactPage() {
   return (
     <>
+      <Breadcrumbs items={[{ name: "Contact", nameBn: "যোগাযোগ", href: "/contact" }]} />
       {/* Hero */}
       <section className="relative section-pad overflow-hidden">
         <GradientBlob tone="emerald" size="xl" opacity={0.12} className="-top-32 -right-32" />
@@ -54,10 +57,12 @@ export default function ContactPage() {
             <div className="flex items-center gap-4 mb-8 p-4 rounded-card-lg bg-paper border border-border">
               <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-emerald/40 shrink-0">
                 <Image
-                  src="/main.jpeg"
-                  alt="Ubaydullah Nayeem"
+                  src="/main.webp"
+                  alt="Hafiz Qari Ubaydullah Nayeem"
                   fill
                   sizes="64px"
+                  placeholder="blur"
+                  blurDataURL={blurFor("/main.webp")}
                   className="object-cover"
                 />
               </div>

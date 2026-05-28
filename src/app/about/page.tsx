@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { buildMetadata } from "@/lib/seo";
+import { blurFor } from "@/lib/blurs";
 import { bio } from "@/lib/data/bio";
 import { site } from "@/lib/site";
 import { GradientBlob } from "@/components/effects/GradientBlob";
@@ -9,6 +10,7 @@ import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/effects/S
 import { MagneticButton } from "@/components/effects/MagneticButton";
 import { Parallax } from "@/components/effects/Parallax";
 import { L } from "@/components/shared/L";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 
 export const metadata: Metadata = buildMetadata({
   title: "About",
@@ -19,6 +21,7 @@ export const metadata: Metadata = buildMetadata({
 export default function AboutPage() {
   return (
     <>
+      <Breadcrumbs items={[{ name: "About", nameBn: "পরিচয়", href: "/about" }]} />
       {/* Hero */}
       <section className="relative section-pad overflow-hidden">
         <GradientBlob tone="emerald" size="xl" opacity={0.14} className="-top-40 -left-32" />
@@ -101,27 +104,53 @@ export default function AboutPage() {
             <ScrollReveal className="col-span-12 md:col-span-7 row-span-2">
               <div className="relative aspect-[4/5] md:aspect-[4/4.4] rounded-card-lg overflow-hidden ring-1 ring-border">
                 <Image
-                  src="/1.jpg"
-                  alt="Ubaydullah Nayeem at a public lecture"
+                  src="/1.webp"
+                  alt="Hafiz Qari Ubaydullah Nayeem speaking at an annual gathering"
                   fill
                   sizes="(min-width: 768px) 56vw, 100vw"
+                  placeholder="blur"
+                  blurDataURL={blurFor("/1.webp")}
                   className="object-cover"
                 />
               </div>
             </ScrollReveal>
             <ScrollReveal className="col-span-6 md:col-span-5" delay={0.08}>
               <div className="relative aspect-[4/3] rounded-card-lg overflow-hidden ring-1 ring-border">
-                <Image src="/2.jpg" alt="Ubaydullah Nayeem" fill sizes="(min-width: 768px) 35vw, 50vw" className="object-cover" />
+                <Image
+                  src="/2.webp"
+                  alt="Ubaydullah Nayeem between sessions"
+                  fill
+                  sizes="(min-width: 768px) 35vw, 50vw"
+                  placeholder="blur"
+                  blurDataURL={blurFor("/2.webp")}
+                  className="object-cover"
+                />
               </div>
             </ScrollReveal>
             <ScrollReveal className="col-span-6 md:col-span-5" delay={0.16}>
               <div className="relative aspect-[4/3] rounded-card-lg overflow-hidden ring-1 ring-border">
-                <Image src="/3.jpg" alt="Ubaydullah Nayeem" fill sizes="(min-width: 768px) 35vw, 50vw" className="object-cover" />
+                <Image
+                  src="/3.webp"
+                  alt="Ubaydullah Nayeem during a quiet hour"
+                  fill
+                  sizes="(min-width: 768px) 35vw, 50vw"
+                  placeholder="blur"
+                  blurDataURL={blurFor("/3.webp")}
+                  className="object-cover"
+                />
               </div>
             </ScrollReveal>
             <ScrollReveal className="col-span-12 md:col-span-5" delay={0.24}>
               <div className="relative aspect-[4/3] md:aspect-[16/9] rounded-card-lg overflow-hidden ring-1 ring-border">
-                <Image src="/4.jpg" alt="Ubaydullah Nayeem" fill sizes="(min-width: 768px) 35vw, 100vw" className="object-cover" />
+                <Image
+                  src="/4.webp"
+                  alt="Ubaydullah Nayeem at home in Dhaka"
+                  fill
+                  sizes="(min-width: 768px) 35vw, 100vw"
+                  placeholder="blur"
+                  blurDataURL={blurFor("/4.webp")}
+                  className="object-cover"
+                />
               </div>
             </ScrollReveal>
           </div>

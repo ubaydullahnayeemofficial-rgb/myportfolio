@@ -1,15 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, JetBrains_Mono, Noto_Serif_Bengali } from "next/font/google";
+import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
 import "./globals.css";
 import { PageShell } from "@/components/layout/PageShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { personSchema, websiteSchema, organizationSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 
+/* ---------- Fonts (trimmed to what's used in the design) ----------
+   next/font self-hosts these and inlines critical CSS. We deliberately
+   ship only 2-3 weights per family to keep the font payload under the
+   PageSpeed budget. */
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
   style: ["normal", "italic"],
   display: "swap",
 });
@@ -17,56 +21,62 @@ const fraunces = Fraunces({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500"],
   display: "swap",
 });
 
 const notoBn = Noto_Serif_Bengali({
   variable: "--font-noto-bn",
   subsets: ["bengali"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "600"],
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
+/* ---------- Metadata ---------- */
+
+const TITLE_DEFAULT = `${site.name} — Hafiz · Qari · Porichalok`;
+const KEYWORDS = [
+  "Ubaydullah Nayeem",
+  "উবায়দুল্লাহ নাঈম",
+  "Baitul Quran wa Assunnah Madrasah",
+  "Hifzul Quran Girls Madrasah",
+  "Bangladesh madrasah",
+  "hifz program Dhaka",
+  "Jatrabari madrasah",
+  "Qari Bangladesh",
+  "qira'at maqamat",
+  "Hafiz Qari Bangladesh",
+  "Islamic education Bangladesh",
+  "Mahadul Qira'at Bangladesh",
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Mu'allim & Porichalok`,
+    default: TITLE_DEFAULT,
     template: `%s · ${site.name}`,
   },
   description: site.tagline,
-  keywords: [
-    "Ubaydullah Nayeem",
-    "Baitul Quran wa Assunnah Madrasah",
-    "Bangladesh madrasah",
-    "Islamic education",
-    "Quran teacher Bangladesh",
-    "hifz program Dhaka",
-    "Jatrabari madrasah",
-    "Dars-e-Nizami",
-  ],
-  authors: [{ name: site.name }],
+  keywords: KEYWORDS,
+  authors: [{ name: site.name, url: site.url }],
   creator: site.name,
+  publisher: site.name,
+  applicationName: site.name,
+  category: "Education",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "bn_BD",
+    alternateLocale: ["en_US"],
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — Mu'allim & Porichalok`,
+    title: TITLE_DEFAULT,
     description: site.tagline,
     images: [
       {
-        url: "/main.jpeg",
+        url: "/main.webp",
         width: 1080,
         height: 1080,
-        alt: `${site.name} — Mu'allim & Porichalok of Baitul Quran wa Assunnah Madrasah`,
+        alt: `${site.name} — Hafiz, Qari and Porichalok of Baitul Quran wa Assunnah Madrasah`,
       },
     ],
   },
@@ -74,9 +84,19 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.name,
     description: site.tagline,
-    images: ["/main.jpeg"],
+    images: ["/main.webp"],
   },
-  alternates: { canonical: "/" },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "bn-BD": "/",
+      "en-US": "/",
+      "x-default": "/",
+    },
+    types: {
+      "application/rss+xml": [{ url: "/feed.xml", title: `${site.name} — Journal` }],
+    },
+  },
   robots: {
     index: true,
     follow: true,
@@ -88,6 +108,19 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  verification: {
+    // Replace these placeholders with the verified strings from
+    // Google Search Console / Bing Webmaster Tools when ready.
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
+    other: process.env.NEXT_PUBLIC_BING_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION }
+      : undefined,
+  },
 };
 
 export const viewport: Viewport = {
@@ -97,7 +130,10 @@ export const viewport: Viewport = {
   ],
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
+
+/* ---------- Pre-paint locale + theme script ---------- */
 
 const prePaintScript = `(function(){
   try {
@@ -118,9 +154,13 @@ export default function RootLayout({
       lang="bn"
       data-locale="bn"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${inter.variable} ${notoBn.variable} ${mono.variable} h-full`}
+      className={`${fraunces.variable} ${inter.variable} ${notoBn.variable} h-full`}
     >
       <head>
+        {/* Resource hints — connect early to the origins we actually use */}
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        <link rel="dns-prefetch" href="https://wa.me" />
         <script dangerouslySetInnerHTML={{ __html: prePaintScript }} />
       </head>
       <body className="min-h-full flex flex-col font-body antialiased">

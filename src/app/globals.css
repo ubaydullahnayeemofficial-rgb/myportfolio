@@ -95,9 +95,9 @@
 
   /* Fonts */
   --font-display: var(--font-fraunces), 'Fraunces', 'Cormorant Garamond', serif;
-  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-body: var(--font-inter), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-bn: var(--font-noto-bn), 'Noto Serif Bengali', 'SolaimanLipi', serif;
-  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Spacing */
   --spacing-section: 8rem;
@@ -552,6 +552,15 @@ body {
   width: 100%;
   height: 80px;
 }
+
+/* =========================================================
+   CSS containment — let the browser skip work on stable sections.
+   ========================================================= */
+
+main > section { contain: layout style; content-visibility: auto; contain-intrinsic-size: 800px; }
+
+/* Disable content-visibility on the first hero so it paints immediately. */
+main > section:first-child { content-visibility: visible; }
 
 /* =========================================================
    Reduced motion

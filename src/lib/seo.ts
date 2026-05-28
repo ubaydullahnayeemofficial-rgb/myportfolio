@@ -13,7 +13,7 @@ type PageMeta = {
 export function buildMetadata({ title, description, path = "/", ogImage }: PageMeta): Metadata {
   const url = new URL(path, baseUrl).toString();
   const desc = description ?? site.tagline;
-  const image = ogImage ?? "/main.jpeg";
+  const image = ogImage ?? "/main.webp";
 
   return {
     title,
@@ -98,14 +98,107 @@ export function articleSchema(post: {
   excerpt: string;
   slug: string;
   published_at: string;
+  updated_at?: string;
+  category?: string;
+  reading_minutes?: number;
 }) {
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    author: { "@type": "Person", name: site.name, url: baseUrl },
+    image: new URL("/main.webp", baseUrl).toString(),
+    author: {
+      "@type": "Person",
+      name: site.name,
+      alternateName: site.nameBn,
+      url: baseUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      logo: {
+        "@type": "ImageObject",
+        url: new URL("/icon.svg", baseUrl).toString(),
+      },
+    },
     datePublished: post.published_at,
-    mainEntityOfPage: new URL(`/blog/${post.slug}`, baseUrl).toString(),
+    dateModified: post.updated_at ?? post.published_at,
+    articleSection: post.category,
+    timeRequired: post.reading_minutes ? `PT${post.reading_minutes}M` : undefined,
+    inLanguage: ["en", "bn"],
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": new URL(`/blog/${post.slug}`, baseUrl).toString(),
+    },
+  };
+}
+
+export function breadcrumbSchema(
+  items: Array<{ name: string; href: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: new URL(item.href, baseUrl).toString(),
+    })),
+  };
+}
+
+export function faqSchema(items: Array<{ q: string; a: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(({ q, a }) => ({
+      "@type": "Question",
+      name: q,
+      acceptedAnswer: { "@type": "Answer", text: a },
+    })),
+  };
+}
+
+export function videoObjectSchema(video: {
+  id: string;
+  title: string;
+  thumbnail: string;
+  publishedAt: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.title,
+    description: video.title,
+    thumbnailUrl: video.thumbnail,
+    uploadDate: video.publishedAt,
+    contentUrl: video.url,
+    embedUrl: `https://www.youtube.com/embed/${video.id}`,
+    publisher: {
+      "@type": "Person",
+      name: site.name,
+      url: baseUrl,
+    },
+  };
+}
+
+export function collectionPageSchema(meta: {
+  name: string;
+  description: string;
+  path: string;
+  numberOfItems?: number;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: meta.name,
+    description: meta.description,
+    url: new URL(meta.path, baseUrl).toString(),
+    isPartOf: { "@type": "WebSite", name: site.name, url: baseUrl },
+    numberOfItems: meta.numberOfItems,
+    inLanguage: ["en", "bn"],
   };
 }

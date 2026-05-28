@@ -10,6 +10,8 @@ import { ArabesqueBackdrop } from "@/components/effects/ArabesqueBackdrop";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { Prose } from "@/components/shared/Prose";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { MagneticButton } from "@/components/effects/MagneticButton";
 import { fallbackPosts } from "@/lib/data/posts";
 import { site } from "@/lib/site";
@@ -46,7 +48,22 @@ export default async function BlogPostPage(props: PageProps<"/blog/[slug]">) {
           excerpt: post.excerpt,
           slug: post.slug,
           published_at: post.published_at,
+          category: post.category,
+          reading_minutes: post.reading_minutes,
         })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", href: "/" },
+          { name: "Journal", href: "/blog" },
+          { name: post.title, href: `/blog/${post.slug}` },
+        ])}
+      />
+      <Breadcrumbs
+        items={[
+          { name: "Journal", nameBn: "জার্নাল", href: "/blog" },
+          { name: post.title, nameBn: post.title_bn ?? post.title, href: `/blog/${post.slug}` },
+        ]}
       />
 
       {/* Hero */}

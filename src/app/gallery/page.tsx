@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, collectionPageSchema } from "@/lib/seo";
 import { fetchYouTubeVideos } from "@/lib/youtube";
 import { galleryImages } from "@/lib/data/gallery";
 import { GalleryClient } from "./GalleryClient";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 
 export const metadata: Metadata = buildMetadata({
   title: "Gallery",
   description:
-    "Gallery — photographs and YouTube lectures of Hafiz Qari Ubaydullah Nayeem.",
+    "Photographs and YouTube lectures of Hafiz Qari Ubaydullah Nayeem — straight from gatherings, the minbar, and quiet hours in Dhaka.",
   path: "/gallery",
 });
 
@@ -26,11 +28,23 @@ export default async function GalleryPage(
   const initialPage = Math.max(1, parseInt(pageParam || "1", 10) || 1);
 
   return (
-    <GalleryClient
-      videos={videos}
-      images={galleryImages}
-      initialTab={initialTab}
-      initialPage={initialPage}
-    />
+    <>
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Gallery — Ubaydullah Nayeem",
+          description:
+            "Photographs and YouTube lectures of Hafiz Qari Ubaydullah Nayeem.",
+          path: "/gallery",
+          numberOfItems: galleryImages.length + videos.length,
+        })}
+      />
+      <Breadcrumbs items={[{ name: "Gallery", nameBn: "গ্যালারি", href: "/gallery" }]} />
+      <GalleryClient
+        videos={videos}
+        images={galleryImages}
+        initialTab={initialTab}
+        initialPage={initialPage}
+      />
+    </>
   );
 }

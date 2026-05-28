@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { blurFor } from "@/lib/blurs";
 import { ArrowUpRight } from "lucide-react";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, collectionPageSchema } from "@/lib/seo";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
 import { getAllPosts } from "@/lib/blog";
 import { formatBnDate } from "@/lib/utils";
 import { GradientBlob } from "@/components/effects/GradientBlob";
@@ -24,6 +27,16 @@ export default async function BlogIndexPage() {
 
   return (
     <>
+      <JsonLd
+        data={collectionPageSchema({
+          name: "Journal — Ubaydullah Nayeem",
+          description:
+            "Field notes on Islamic education, hifz, qira'at, family rhythms, and the small uncelebrated decisions that shape an institution.",
+          path: "/blog",
+          numberOfItems: posts.length,
+        })}
+      />
+      <Breadcrumbs items={[{ name: "Journal", nameBn: "জার্নাল", href: "/blog" }]} />
       {/* Hero */}
       <section className="relative section-pad overflow-hidden">
         <GradientBlob tone="emerald" size="xl" opacity={0.12} className="-top-40 -right-32" />
@@ -82,10 +95,12 @@ export default async function BlogIndexPage() {
                 <div className="lg:col-span-5 order-1 lg:order-2">
                   <div className="aspect-[4/5] rounded-card-lg overflow-hidden relative ring-1 ring-border shadow-card group-hover:shadow-card-hover transition-shadow duration-500">
                     <Image
-                      src="/1.jpg"
-                      alt="A scene from a public lecture"
+                      src="/1.webp"
+                      alt={`Featured journal entry: ${featured.title}`}
                       fill
                       sizes="(min-width: 1024px) 420px, 90vw"
+                      placeholder="blur"
+                      blurDataURL={blurFor("/1.webp")}
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div

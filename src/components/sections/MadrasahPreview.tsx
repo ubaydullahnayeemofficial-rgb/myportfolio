@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { blurFor } from "@/lib/blurs";
 import { ArrowUpRight, GraduationCap, Users, BookMarked, Heart } from "lucide-react";
 import { ScrollReveal, StaggerReveal, StaggerItem } from "@/components/effects/ScrollReveal";
 import { GradientBlob } from "@/components/effects/GradientBlob";
@@ -19,10 +20,12 @@ export function MadrasahPreview() {
           <ScrollReveal className="lg:col-span-5">
             <div className="relative aspect-[4/5] lg:aspect-[4/4.6] rounded-card-lg overflow-hidden ring-1 ring-border shadow-card">
               <Image
-                src="/1.jpg"
-                alt="Ubaydullah Nayeem at a public lecture"
+                src="/1.webp"
+                alt="Hafiz Qari Ubaydullah Nayeem delivering a public lecture from the minbar"
                 fill
                 sizes="(min-width: 1024px) 40vw, 90vw"
+                placeholder="blur"
+                blurDataURL={blurFor("/1.webp")}
                 className="object-cover"
               />
               <div

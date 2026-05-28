@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useMemo, useState } from "react";
+import { blurFor } from "@/lib/blurs";
 import { ChevronLeft, ChevronRight, ExternalLink, Play, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { GradientBlob } from "@/components/effects/GradientBlob";
@@ -139,6 +140,8 @@ export function GalleryClient({
                 alt={lightboxImage.alt}
                 fill
                 sizes="(min-width: 768px) 720px, 92vw"
+                placeholder="blur"
+                blurDataURL={blurFor(lightboxImage.src)}
                 className="object-contain"
               />
             </div>
@@ -225,6 +228,8 @@ function ImageGrid({
               alt={img.alt}
               fill
               sizes="(min-width: 1024px) 22vw, (min-width: 768px) 30vw, 45vw"
+              placeholder="blur"
+              blurDataURL={blurFor(img.src)}
               className="object-cover transition-transform duration-700 group-hover:scale-105"
             />
             <div

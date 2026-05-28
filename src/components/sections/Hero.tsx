@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { blurFor } from "@/lib/blurs";
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { GradientBlob } from "@/components/effects/GradientBlob";
@@ -155,11 +156,14 @@ export function Hero() {
               className="relative ml-auto max-w-md aspect-[4/5] rounded-card-lg overflow-hidden shadow-card-hover ring-1 ring-border"
             >
               <Image
-                src="/main.jpeg"
-                alt="Ubaydullah Nayeem"
+                src="/main.webp"
+                alt="Hafiz Qari Ubaydullah Nayeem — portrait"
                 fill
                 priority
+                fetchPriority="high"
                 sizes="(min-width: 1024px) 420px, 80vw"
+                placeholder="blur"
+                blurDataURL={blurFor("/main.webp")}
                 className="object-cover object-center"
               />
               {/* Gradient wash for premium tone */}
