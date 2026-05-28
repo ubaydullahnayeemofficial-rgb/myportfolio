@@ -46,11 +46,6 @@ export default function MadrasahPage() {
                 />
               </h1>
             </ScrollReveal>
-            <ScrollReveal delay={0.12}>
-              <p className="text-2xl md:text-3xl text-ink-soft mt-5">
-                <L en={site.madrasah.name} bn={site.madrasah.nameBn} />
-              </p>
-            </ScrollReveal>
           </div>
 
           <ScrollReveal className="lg:col-span-5" delay={0.18}>
