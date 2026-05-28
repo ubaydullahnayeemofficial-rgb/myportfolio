@@ -93,11 +93,13 @@
   --color-midnight:   var(--t-midnight);
   --color-midnight-2: var(--t-midnight-2);
 
-  /* Fonts */
-  --font-display: var(--font-fraunces), 'Fraunces', 'Cormorant Garamond', serif;
-  --font-body: var(--font-inter), 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-bn: var(--font-noto-bn), 'Noto Serif Bengali', 'SolaimanLipi', serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Fonts — one family per script.
+     - English: Inter (used for both display and body, weight does the work)
+     - Bangla:  Hind Siliguri (most-used modern Bengali web font in 2025) */
+  --font-display: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-body:    var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-bn:      var(--font-bn), 'Hind Siliguri', 'SolaimanLipi', system-ui, sans-serif;
+  --font-mono:    ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   /* Spacing */
   --spacing-section: 8rem;
@@ -188,15 +190,54 @@ body {
    Typography helpers
    ========================================================= */
 
-.font-display { font-family: var(--font-display); font-feature-settings: "ss01", "salt"; letter-spacing: -0.02em; }
+.font-display { font-family: var(--font-display); font-feature-settings: "ss01", "cv11"; letter-spacing: -0.025em; font-weight: 700; }
 .font-bn { font-family: var(--font-bn); }
 .font-mono { font-family: var(--font-mono); }
 
 .balance { text-wrap: balance; }
 .pretty { text-wrap: pretty; }
 
-/* Display headings get a deliberate italic display option via .italic-display */
-.italic-display { font-family: var(--font-display); font-style: italic; font-weight: 400; }
+/* Emphasis variant used inside display headings — italic, slightly lighter. */
+.italic-display { font-family: var(--font-display); font-style: italic; font-weight: 600; letter-spacing: -0.02em; }
+
+/* =========================================================
+   Locale-driven font selection.
+   When data-locale is Bangla, ALL text uses Hind Siliguri so we never
+   mix scripts on a single page. Bangla also gets a looser line-height
+   on display headings so vowel signs (i-kar, u-kar, e-kar) and reph
+   marks never get clipped by tight English-style leading.
+   ========================================================= */
+
+html[data-locale="bn"] body,
+html[data-locale="bn"] .font-display,
+html[data-locale="bn"] .italic-display {
+  font-family: var(--font-bn);
+}
+
+html[data-locale="bn"] .italic-display {
+  font-style: normal;       /* Bengali rarely italicizes; use weight + color instead */
+  font-weight: 500;
+}
+
+html[data-locale="bn"] h1,
+html[data-locale="bn"] h2,
+html[data-locale="bn"] h3,
+html[data-locale="bn"] .font-display {
+  line-height: 1.22;
+  letter-spacing: 0;
+  word-spacing: 0.05em;
+}
+
+/* Bangla body needs a touch more leading too. */
+html[data-locale="bn"] body { line-height: 1.7; }
+
+/* Hide italic styling on Bangla because italic mainline scripts don't carry over. */
+html[data-locale="bn"] i,
+html[data-locale="bn"] em {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--emerald);
+}
 
 /* =========================================================
    Scrollbar

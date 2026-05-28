@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 import { buildMetadata, collectionPageSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { L } from "@/components/shared/L";
 import { getAllPosts } from "@/lib/blog";
 import { formatBnDate } from "@/lib/utils";
 import { GradientBlob } from "@/components/effects/GradientBlob";
@@ -45,19 +46,25 @@ export default async function BlogIndexPage() {
         <div className="container-page grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
             <ScrollReveal>
-              <span className="kicker">Journal · জার্নাল</span>
+              <span className="kicker">
+                <L en="Journal" bn="জার্নাল" />
+              </span>
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
-              <h1 className="font-display text-6xl md:text-8xl mt-6 leading-[0.96] tracking-tight balance">
-                Field notes from <span className="italic-display gradient-text">the work itself</span>.
+              <h1 className="font-display text-6xl md:text-8xl mt-6 leading-[1] tracking-tight balance">
+                <L
+                  en={<>Field notes from <span className="italic-display gradient-text">the work itself</span>.</>}
+                  bn={<>কাজের মাঠ থেকে <span className="italic-display gradient-text">কিছু টোকা</span>।</>}
+                />
               </h1>
             </ScrollReveal>
           </div>
           <ScrollReveal className="lg:col-span-5" delay={0.15}>
             <p className="text-lg text-ink-soft leading-relaxed pretty">
-              Short, practical, written on the side of teaching. Islamic
-              education, family rhythms, character formation, and the small
-              decisions that quietly shape an institution.
+              <L
+                en="Short, practical, written on the side of teaching. Islamic education, family rhythms, character formation, and the small decisions that quietly shape an institution."
+                bn="ছোট, প্রায়োগিক, পড়ানোর ফাঁকে লেখা। ইসলামি শিক্ষা, পারিবারিক ছন্দ, চরিত্র গঠন, এবং নীরবে প্রতিষ্ঠান গড়ে তোলা ছোট ছোট সিদ্ধান্ত।"
+              />
             </p>
           </ScrollReveal>
         </div>
@@ -75,7 +82,7 @@ export default async function BlogIndexPage() {
                 <div className="lg:col-span-7 order-2 lg:order-1">
                   <div className="flex items-center gap-3 text-xs tracking-[0.18em] uppercase text-ink-muted">
                     <span className="px-3 py-1 rounded-full bg-emerald/10 text-emerald font-medium">
-                      Featured
+                      <L en="Featured" bn="বিশেষ" />
                     </span>
                     <span>{featured.category}</span>
                     <span>·</span>
@@ -89,7 +96,7 @@ export default async function BlogIndexPage() {
                     {featured.excerpt}
                   </p>
                   <span className="mt-8 inline-flex items-center gap-2 text-emerald font-medium link-sweep">
-                    Read the entry <ArrowUpRight size={18} />
+                    <L en="Read the entry" bn="পড়ুন" /> <ArrowUpRight size={18} />
                   </span>
                 </div>
                 <div className="lg:col-span-5 order-1 lg:order-2">
@@ -113,11 +120,11 @@ export default async function BlogIndexPage() {
                           {featured.reading_minutes}
                         </div>
                         <div className="mt-1 text-[10px] tracking-[0.22em] uppercase opacity-80">
-                          min read
+                          <L en="min read" bn="মিনিট পড়া" />
                         </div>
                       </div>
                       <span className="text-[10px] tracking-[0.22em] uppercase opacity-80">
-                        From the journal
+                        <L en="From the journal" bn="জার্নাল থেকে" />
                       </span>
                     </div>
                   </div>
@@ -131,7 +138,9 @@ export default async function BlogIndexPage() {
       {/* Categories */}
       <section className="border-y border-border bg-paper-2">
         <div className="container-page py-6 flex flex-wrap items-center gap-3 text-sm">
-          <span className="text-xs tracking-[0.2em] uppercase text-ink-muted mr-1">Categories</span>
+          <span className="text-xs tracking-[0.2em] uppercase text-ink-muted mr-1">
+            <L en="Categories" bn="বিভাগসমূহ" />
+          </span>
           {categories.map((c) => (
             <span
               key={c}
@@ -156,12 +165,14 @@ export default async function BlogIndexPage() {
                   <div className="flex items-center gap-3 text-xs tracking-[0.18em] uppercase text-ink-muted">
                     <span>{p.category}</span>
                     <span>·</span>
-                    <span className="numeral">{p.reading_minutes} min</span>
+                    <span>
+                      {p.reading_minutes}{" "}
+                      <L en="min" bn="মিনিট" />
+                    </span>
                   </div>
                   <h3 className="font-display text-2xl md:text-3xl mt-5 leading-tight tracking-tight group-hover:text-emerald transition-colors">
-                    {p.title}
+                    <L en={p.title} bn={p.title_bn ?? p.title} />
                   </h3>
-                  <p className="font-bn text-sm text-emerald mt-1">{p.title_bn}</p>
                   <p className="mt-4 text-sm text-ink-soft leading-relaxed pretty line-clamp-4">{p.excerpt}</p>
                   <div className="mt-5 text-xs text-ink-muted">{formatBnDate(p.published_at)}</div>
                 </Link>

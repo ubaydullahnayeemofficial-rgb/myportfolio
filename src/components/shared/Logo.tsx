@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { L } from "@/components/shared/L";
 
 export function Logo({
   href = "/",
@@ -56,10 +57,13 @@ export function Logo({
       </svg>
       <span className="flex flex-col leading-tight">
         <span className="font-display text-base md:text-[1.05rem] tracking-tight">
-          Ubaydullah Nayeem
+          <L en="Ubaydullah Nayeem" bn="উবায়দুল্লাহ নাঈম" />
         </span>
         <span className="text-[10px] tracking-[0.18em] uppercase text-ink-muted">
-          Mu&apos;allim · Porichalok
+          <L
+            en={<>Mu&apos;allim · Porichalok</>}
+            bn={<>মুয়াল্লিম · পরিচালক</>}
+          />
         </span>
       </span>
     </Link>

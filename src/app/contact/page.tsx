@@ -11,6 +11,7 @@ import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { MagneticButton } from "@/components/effects/MagneticButton";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { L } from "@/components/shared/L";
 
 export const metadata: Metadata = buildMetadata({
   title: "Contact",
@@ -31,19 +32,25 @@ export default function ContactPage() {
         <div className="container-page grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
             <ScrollReveal>
-              <span className="kicker">Salam · যোগাযোগ</span>
+              <span className="kicker">
+                <L en="Salam · Contact" bn="সালাম · যোগাযোগ" />
+              </span>
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
-              <h1 className="font-display text-6xl md:text-8xl mt-6 leading-[0.96] tracking-tight balance">
-                Begin a <span className="italic-display gradient-text">conversation</span>.
+              <h1 className="font-display text-6xl md:text-8xl mt-6 leading-[1] tracking-tight balance">
+                <L
+                  en={<>Begin a <span className="italic-display gradient-text">conversation</span>.</>}
+                  bn={<>একটি <span className="italic-display gradient-text">কথোপকথন</span> শুরু করুন।</>}
+                />
               </h1>
             </ScrollReveal>
           </div>
           <ScrollReveal className="lg:col-span-5" delay={0.15}>
             <p className="text-lg text-ink-soft leading-relaxed pretty">
-              Whether you are a parent thinking about admissions, a student
-              asking a sincere question, or an institution that wants to talk —
-              we read everything. Replies are slow but real.
+              <L
+                en="Whether you are a parent thinking about admissions, a student asking a sincere question, or an institution that wants to talk — we read everything. Replies are slow but real."
+                bn="ভর্তি নিয়ে চিন্তিত অভিভাবক হোক, আন্তরিক প্রশ্ন নিয়ে আসা ছাত্র হোক, কিংবা কথা বলতে আগ্রহী কোনো প্রতিষ্ঠান হোক — আমরা সব বার্তা পড়ি। উত্তর আসতে একটু সময় লাগে — কিন্তু আন্তরিকভাবে।"
+              />
             </p>
           </ScrollReveal>
         </div>
@@ -67,16 +74,25 @@ export default function ContactPage() {
                 />
               </div>
               <div>
-                <p className="text-[10px] tracking-[0.22em] uppercase text-ink-muted">Replies come from</p>
-                <p className="font-display text-lg tracking-tight mt-0.5">{site.name}</p>
-                <p className="font-bn text-sm text-emerald">{site.nameBn}</p>
+                <p className="text-[10px] tracking-[0.22em] uppercase text-ink-muted">
+                  <L en="Replies come from" bn="উত্তর আসে — " />
+                </p>
+                <p className="font-display text-lg tracking-tight mt-0.5">
+                  <L en={site.name} bn={site.nameBn} />
+                </p>
+                <p className="text-sm text-emerald">
+                  <L en={site.role} bn={site.roleBn} />
+                </p>
               </div>
             </div>
             <h2 className="font-display text-3xl md:text-4xl tracking-tight leading-tight">
-              Where to find us.
+              <L en="Where to find us." bn="আমাদের ঠিকানা।" />
             </h2>
             <p className="mt-3 text-ink-muted">
-              Visit during weekday hours. Bring the student. The first meeting is unhurried on purpose.
+              <L
+                en="Visit during weekday hours. Bring the student. The first meeting is unhurried on purpose."
+                bn="কর্মদিবসে সময় বের করে আসুন, ছাত্রকে সঙ্গে আনুন। প্রথম বৈঠকটি ইচ্ছাকৃতভাবেই ধীরস্থির।"
+              />
             </p>
 
             <ul className="mt-10 flex flex-col gap-6">
@@ -85,8 +101,12 @@ export default function ContactPage() {
                   <MapPin size={16} />
                 </span>
                 <div>
-                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">Address</div>
-                  <p className="mt-1 text-lg font-display tracking-tight">{site.madrasah.address}</p>
+                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">
+                    <L en="Address" bn="ঠিকানা" />
+                  </div>
+                  <p className="mt-1 text-lg font-display tracking-tight">
+                    <L en={site.madrasah.address} bn={site.madrasah.addressBn} />
+                  </p>
                 </div>
               </li>
               <li className="flex items-start gap-4">
@@ -94,7 +114,9 @@ export default function ContactPage() {
                   <Phone size={16} />
                 </span>
                 <div>
-                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">Phone</div>
+                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">
+                    <L en="Phone" bn="ফোন" />
+                  </div>
                   <a
                     href={`tel:${site.phone}`}
                     className="mt-1 inline-block text-lg font-display tracking-tight hover:text-emerald link-sweep"
@@ -108,10 +130,12 @@ export default function ContactPage() {
                   <Mail size={16} />
                 </span>
                 <div>
-                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">Email</div>
+                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">
+                    <L en="Email" bn="ইমেইল" />
+                  </div>
                   <a
                     href={`mailto:${site.email}`}
-                    className="mt-1 inline-block text-lg font-display tracking-tight hover:text-emerald link-sweep"
+                    className="mt-1 inline-block text-lg font-display tracking-tight hover:text-emerald link-sweep break-all"
                   >
                     {site.email}
                   </a>
@@ -122,7 +146,9 @@ export default function ContactPage() {
                   <MessageCircle size={16} />
                 </span>
                 <div>
-                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">WhatsApp</div>
+                  <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">
+                    <L en="WhatsApp" bn="হোয়াটসঅ্যাপ" />
+                  </div>
                   <MagneticButton
                     href={site.whatsappLink}
                     variant="primary"
@@ -130,14 +156,16 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="mt-2 text-sm"
                   >
-                    Message us
+                    <L en="Message us" bn="বার্তা পাঠান" />
                   </MagneticButton>
                 </div>
               </li>
             </ul>
 
             <div className="mt-10 pt-8 border-t border-border">
-              <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">Elsewhere</div>
+              <div className="text-xs tracking-[0.18em] uppercase text-ink-muted">
+                <L en="Elsewhere" bn="অন্যান্য মাধ্যম" />
+              </div>
               <div className="flex items-center gap-3 mt-4">
                 <a
                   href={site.socials.facebook}
@@ -174,10 +202,13 @@ export default function ContactPage() {
           <ScrollReveal className="lg:col-span-7" delay={0.1}>
             <div className="rounded-card-lg bg-paper border border-border p-8 md:p-10">
               <h2 className="font-display text-3xl md:text-4xl tracking-tight leading-tight">
-                Write a short note.
+                <L en="Write a short note." bn="একটি ছোট বার্তা লিখুন।" />
               </h2>
               <p className="mt-2 text-sm text-ink-muted">
-                Two or three sentences is enough. We&apos;ll write back from the same address.
+                <L
+                  en="Two or three sentences is enough. We'll write back from the same address."
+                  bn="দু-তিন বাক্যই যথেষ্ট। আমরা একই ঠিকানা থেকেই উত্তর দেব।"
+                />
               </p>
               <div className="mt-8">
                 <ContactForm />

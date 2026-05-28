@@ -4,6 +4,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { buildMetadata, faqSchema } from "@/lib/seo";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/shared/Breadcrumbs";
+import { L } from "@/components/shared/L";
 import { site } from "@/lib/site";
 import { madrasah } from "@/lib/data/madrasah";
 import { faqs } from "@/lib/data/faqs";
@@ -33,27 +34,38 @@ export default function MadrasahPage() {
         <div className="container-page grid lg:grid-cols-12 gap-10 items-end">
           <div className="lg:col-span-7">
             <ScrollReveal>
-              <span className="kicker">The Madrasah · বাইতুল কুরআন</span>
+              <span className="kicker">
+                <L en="The Madrasah" bn="মাদরাসা" />
+              </span>
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
-              <h1 className="font-display text-6xl md:text-8xl mt-6 leading-[0.96] tracking-tight balance">
-                Baitul Quran <span className="italic-display gradient-text">wa Assunnah</span>.
+              <h1 className="font-display text-6xl md:text-8xl mt-6 leading-[1] tracking-tight balance">
+                <L
+                  en={<>Baitul Quran <span className="italic-display gradient-text">wa Assunnah</span>.</>}
+                  bn={<>বায়তুল কুরআন <span className="italic-display gradient-text">ওয়াস সুন্নাহ</span>।</>}
+                />
               </h1>
             </ScrollReveal>
             <ScrollReveal delay={0.12}>
-              <p className="font-bn text-2xl md:text-3xl text-ink-soft mt-5">
-                {site.madrasah.nameBn}
+              <p className="text-2xl md:text-3xl text-ink-soft mt-5">
+                <L en={site.madrasah.name} bn={site.madrasah.nameBn} />
               </p>
             </ScrollReveal>
           </div>
 
           <ScrollReveal className="lg:col-span-5" delay={0.18}>
-            <p className="text-lg text-ink-soft leading-relaxed pretty">{madrasah.intro}</p>
+            <p className="text-lg text-ink-soft leading-relaxed pretty">
+              <L en={madrasah.intro} bn={madrasah.introBn} />
+            </p>
             <div className="mt-6 text-sm text-ink-muted">
               <div>
-                <span className="numeral text-emerald">Est. {site.madrasah.founded}</span>
+                <span className="text-emerald font-medium">
+                  <L en={`Est. ${site.madrasah.founded}`} bn={`প্রতিষ্ঠা ${site.madrasah.founded}`} />
+                </span>
                 <span className="mx-2">·</span>
-                <span>{site.madrasah.address}</span>
+                <span>
+                  <L en={site.madrasah.address} bn={site.madrasah.addressBn} />
+                </span>
               </div>
             </div>
             <a
@@ -62,7 +74,7 @@ export default function MadrasahPage() {
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 text-emerald font-medium link-sweep"
             >
-              Institutional site <ArrowUpRight size={18} />
+              <L en="Institutional site" bn="প্রতিষ্ঠানের ওয়েবসাইট" /> <ArrowUpRight size={18} />
             </a>
           </ScrollReveal>
         </div>
@@ -72,13 +84,20 @@ export default function MadrasahPage() {
       <section className="bg-paper-2 section-pad relative overflow-hidden">
         <div className="container-page grid lg:grid-cols-12 gap-10 items-center">
           <ScrollReveal className="lg:col-span-5">
-            <span className="kicker">Mission</span>
-            <h2 className="font-display text-4xl md:text-5xl mt-6 leading-[1.04] tracking-tight balance">
-              We are raising a generation, not running a school.
+            <span className="kicker">
+              <L en="Mission" bn="লক্ষ্য" />
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl mt-6 leading-[1.1] tracking-tight balance">
+              <L
+                en="We are raising a generation, not running a school."
+                bn="আমরা একটি প্রজন্ম গড়ছি — শুধু একটি স্কুল চালাচ্ছি না।"
+              />
             </h2>
           </ScrollReveal>
           <ScrollReveal className="lg:col-span-7" delay={0.1}>
-            <p className="text-lg md:text-xl text-ink-soft leading-relaxed pretty">{madrasah.mission}</p>
+            <p className="text-lg md:text-xl text-ink-soft leading-relaxed pretty">
+              <L en={madrasah.mission} bn={madrasah.missionBn} />
+            </p>
           </ScrollReveal>
         </div>
       </section>
@@ -87,11 +106,16 @@ export default function MadrasahPage() {
       <section className="section-pad relative overflow-hidden">
         <div className="container-page">
           <ScrollReveal>
-            <span className="kicker">Divisions · Programs</span>
+            <span className="kicker">
+              <L en="Divisions · Programs" bn="বিভাগ · কোর্সসমূহ" />
+            </span>
           </ScrollReveal>
           <ScrollReveal delay={0.05}>
-            <h2 className="font-display text-5xl md:text-6xl mt-6 leading-[1.02] tracking-tight balance max-w-3xl">
-              Four programs. One <span className="italic-display gradient-text">centered child</span>.
+            <h2 className="font-display text-5xl md:text-6xl mt-6 leading-[1.05] tracking-tight balance max-w-3xl">
+              <L
+                en={<>Four programs. One <span className="italic-display gradient-text">centered child</span>.</>}
+                bn={<>চারটি বিভাগ। একজন <span className="italic-display gradient-text">কেন্দ্রিত শিক্ষার্থী</span>।</>}
+              />
             </h2>
           </ScrollReveal>
 
@@ -136,11 +160,16 @@ export default function MadrasahPage() {
         <GradientBlob tone="gold" size="lg" opacity={0.07} className="-top-32 -right-32" />
         <div className="container-page">
           <ScrollReveal>
-            <span className="kicker">The approach</span>
+            <span className="kicker">
+              <L en="The approach" bn="পদ্ধতি" />
+            </span>
           </ScrollReveal>
           <ScrollReveal delay={0.05}>
-            <h2 className="font-display text-5xl md:text-6xl mt-6 leading-[1.02] tracking-tight balance max-w-3xl">
-              How we run an <span className="italic-display gradient-text">uncommonly small institution</span>.
+            <h2 className="font-display text-5xl md:text-6xl mt-6 leading-[1.05] tracking-tight balance max-w-3xl">
+              <L
+                en={<>How we run an <span className="italic-display gradient-text">uncommonly small institution</span>.</>}
+                bn={<>একটি <span className="italic-display gradient-text">ছোট প্রতিষ্ঠান</span> কীভাবে চালানো হয়।</>}
+              />
             </h2>
           </ScrollReveal>
 
@@ -156,7 +185,9 @@ export default function MadrasahPage() {
           </StaggerReveal>
 
           <div className="mt-14 rounded-card-lg border border-border p-8 bg-paper">
-            <h3 className="font-display text-2xl tracking-tight">Facilities</h3>
+            <h3 className="font-display text-2xl tracking-tight">
+              <L en="Facilities" bn="সুযোগ-সুবিধা" />
+            </h3>
             <ul className="mt-5 grid md:grid-cols-2 gap-x-10 gap-y-3">
               {madrasah.facilities.map((f) => (
                 <li key={f} className="flex items-start gap-2.5 text-ink-soft">
@@ -174,15 +205,22 @@ export default function MadrasahPage() {
         <div className="container-page grid lg:grid-cols-12 gap-12">
           <div className="lg:col-span-4 lg:sticky lg:top-32 self-start">
             <ScrollReveal>
-              <span className="kicker">Admissions</span>
+              <span className="kicker">
+                <L en="Admissions" bn="ভর্তি" />
+              </span>
             </ScrollReveal>
             <ScrollReveal delay={0.05}>
-              <h2 className="font-display text-4xl md:text-5xl mt-6 leading-[1.04] tracking-tight balance">
-                A four-step conversation, not a form.
+              <h2 className="font-display text-4xl md:text-5xl mt-6 leading-[1.1] tracking-tight balance">
+                <L
+                  en="A four-step conversation, not a form."
+                  bn="চার ধাপের একটি কথোপকথন — কোনো ফরম নয়।"
+                />
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={0.15}>
-              <p className="mt-6 text-ink-soft leading-relaxed pretty">{madrasah.admissions.summary}</p>
+              <p className="mt-6 text-ink-soft leading-relaxed pretty">
+                <L en={madrasah.admissions.summary} bn={madrasah.admissions.summaryBn ?? madrasah.admissions.summary} />
+              </p>
             </ScrollReveal>
             <ScrollReveal delay={0.25}>
               <MagneticButton
@@ -192,7 +230,7 @@ export default function MadrasahPage() {
                 rel="noopener noreferrer"
                 className="mt-8"
               >
-                Begin a conversation
+                <L en="Begin a conversation" bn="কথা শুরু করুন" />
               </MagneticButton>
             </ScrollReveal>
           </div>
@@ -217,15 +255,20 @@ export default function MadrasahPage() {
       <section className="section-pad bg-paper-2 relative overflow-hidden">
         <div className="container-page grid lg:grid-cols-12 gap-12">
           <ScrollReveal className="lg:col-span-4">
-            <span className="kicker">FAQ</span>
-            <h2 className="font-display text-4xl md:text-5xl mt-6 leading-[1.04] tracking-tight balance">
-              The questions we receive most often.
+            <span className="kicker">
+              <L en="FAQ" bn="প্রশ্নোত্তর" />
+            </span>
+            <h2 className="font-display text-4xl md:text-5xl mt-6 leading-[1.1] tracking-tight balance">
+              <L
+                en="The questions we receive most often."
+                bn="যেসব প্রশ্ন বেশি আসে।"
+              />
             </h2>
             <Link
               href="/contact"
               className="mt-6 inline-flex items-center gap-2 text-emerald font-medium link-sweep"
             >
-              Ask your own <ArrowUpRight size={18} />
+              <L en="Ask your own" bn="নিজের প্রশ্ন করুন" /> <ArrowUpRight size={18} />
             </Link>
           </ScrollReveal>
           <div className="lg:col-span-8 divide-y divide-border">

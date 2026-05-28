@@ -48,23 +48,22 @@ export function Hero() {
             </span>
           </motion.span>
 
-          <h1 className="font-display text-[15vw] lg:text-[8.2rem] leading-[0.92] tracking-tight balance">
+          <h1 className="font-display text-[14vw] lg:text-[8rem] leading-[0.95] tracking-tight balance">
             <motion.span
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
               className="block"
             >
-              Ubaydullah
+              <L en="Ubaydullah" bn="উবায়দুল্লাহ" />
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
               className="italic-display block gradient-text-animate"
-              style={{ fontStyle: "italic" }}
             >
-              Nayeem
+              <L en="Nayeem" bn="নাঈম" />
             </motion.span>
           </h1>
 
@@ -72,13 +71,12 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.32 }}
-            className="font-bn text-2xl md:text-3xl text-ink-soft/85 tracking-tight"
+            className="text-xl md:text-2xl text-ink-soft/85 tracking-tight"
           >
-            উবায়দুল্লাহ নাঈম
-            <span className="text-ink-muted mx-2">·</span>
-            <span className="text-ink-muted">
-              <L en="Hafiz · Qari" bn="হাফেজ · ক্বারী" />
-            </span>
+            <L
+              en={<>Hafiz · Qari · <span className="text-ink-muted">{site.honorific}</span></>}
+              bn={<>হাফেজ ক্বারী · <span className="text-ink-muted">মাদরাসা পরিচালক</span></>}
+            />
           </motion.p>
 
           <motion.div

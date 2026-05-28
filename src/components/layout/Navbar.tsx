@@ -9,6 +9,7 @@ import { site } from "@/lib/site";
 import { Logo } from "@/components/shared/Logo";
 import { ThemeToggle } from "@/components/shared/ThemeToggle";
 import { MagneticButton } from "@/components/effects/MagneticButton";
+import { L } from "@/components/shared/L";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -54,7 +55,7 @@ export function Navbar() {
                     active ? "text-emerald" : "text-ink-soft hover:text-emerald",
                   )}
                 >
-                  {item.label}
+                  <L en={item.label} bn={item.labelBn} />
                 </Link>
               );
             })}
@@ -69,7 +70,7 @@ export function Navbar() {
               rel="noopener noreferrer"
               className="text-sm"
             >
-              Get in Touch
+              <L en="Get in Touch" bn="যোগাযোগ করুন" />
             </MagneticButton>
           </div>
 
@@ -103,12 +104,9 @@ export function Navbar() {
                 >
                   <Link
                     href={item.href}
-                    className="flex items-baseline gap-3 py-3 border-b border-border"
+                    className="block py-3 border-b border-border font-display text-3xl tracking-tight"
                   >
-                    <span className="font-display text-3xl">{item.label}</span>
-                    <span className="font-bn text-base text-ink-muted">
-                      {item.labelBn}
-                    </span>
+                    <L en={item.label} bn={item.labelBn} />
                   </Link>
                 </motion.div>
               ))}
@@ -120,7 +118,7 @@ export function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Get in Touch
+                  <L en="Get in Touch" bn="যোগাযোগ করুন" />
                 </MagneticButton>
               </div>
             </nav>

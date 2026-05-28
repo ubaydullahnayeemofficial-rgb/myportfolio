@@ -102,6 +102,8 @@ export const madrasah = {
   admissions: {
     summary:
       "Admission interviews are held throughout the year as seats open. Parents meet the porichalok, the child is assessed for the appropriate division, and the family agrees to a written parent commitment alongside the student commitment.",
+    summaryBn:
+      "সারা বছরই আসন খালি হওয়ার সাথে সাথে ভর্তি সাক্ষাৎকার নেওয়া হয়। অভিভাবকেরা পরিচালকের সাথে দেখা করেন, ছাত্রকে যথাযথ বিভাগে মূল্যায়ন করা হয়, এবং অভিভাবক ও ছাত্র উভয়েই লিখিত প্রতিশ্রুতিতে স্বাক্ষর করেন।",
     process: [
       {
         step: "01",

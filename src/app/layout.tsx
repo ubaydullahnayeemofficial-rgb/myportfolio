@@ -1,34 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter, Noto_Serif_Bengali } from "next/font/google";
+import { Inter, Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { PageShell } from "@/components/layout/PageShell";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { personSchema, websiteSchema, organizationSchema } from "@/lib/seo";
 import { site } from "@/lib/site";
 
-/* ---------- Fonts (trimmed to what's used in the design) ----------
-   next/font self-hosts these and inlines critical CSS. We deliberately
-   ship only 2-3 weights per family to keep the font payload under the
-   PageSpeed budget. */
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+/* ---------- Fonts ----------
+ * One family per script:
+ *   - English: Inter (top-class modern sans, used by Vercel, Linear, etc.)
+ *   - Bangla:  Hind Siliguri (the most widely-used modern Bengali web font
+ *              in 2025; clean strokes, no clipping on i/u/r/e marks).
+ *
+ * Single-script per locale means we never load a font we won't paint,
+ * and there's no "Nayeem looking like Naveem" italic-y confusion.
+ */
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["400", "500", "600", "700"],
   style: ["normal", "italic"],
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
-
-const notoBn = Noto_Serif_Bengali({
-  variable: "--font-noto-bn",
-  subsets: ["bengali"],
-  weight: ["400", "600"],
+const hindSiliguri = Hind_Siliguri({
+  variable: "--font-bn",
+  subsets: ["bengali", "latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -114,8 +112,6 @@ export const metadata: Metadata = {
     telephone: false,
   },
   verification: {
-    // Replace these placeholders with the verified strings from
-    // Google Search Console / Bing Webmaster Tools when ready.
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION,
     other: process.env.NEXT_PUBLIC_BING_VERIFICATION
       ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION }
@@ -132,8 +128,6 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
 };
-
-/* ---------- Pre-paint locale + theme script ---------- */
 
 const prePaintScript = `(function(){
   try {
@@ -154,10 +148,9 @@ export default function RootLayout({
       lang="bn"
       data-locale="bn"
       suppressHydrationWarning
-      className={`${fraunces.variable} ${inter.variable} ${notoBn.variable} h-full`}
+      className={`${inter.variable} ${hindSiliguri.variable} h-full`}
     >
       <head>
-        {/* Resource hints — connect early to the origins we actually use */}
         <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
         <link rel="dns-prefetch" href="https://wa.me" />
