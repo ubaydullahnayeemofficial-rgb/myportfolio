@@ -33,9 +33,14 @@ export function MadrasahPreview() {
                 className="absolute inset-0 bg-gradient-to-t from-emerald-deep/70 via-emerald-deep/10 to-transparent"
               />
               <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 text-paper">
-                <p className="text-[10px] tracking-[0.22em] uppercase opacity-80">From the minbar</p>
+                <p className="text-[10px] tracking-[0.22em] uppercase opacity-80">
+                  <L en="From the minbar" bn="মিনবার থেকে" />
+                </p>
                 <p className="font-display italic-display text-2xl md:text-3xl mt-2 leading-snug text-gold-bright">
-                  &ldquo;The Quran sets the rhythm. Everything else is downstream.&rdquo;
+                  <L
+                    en={<>&ldquo;The Quran sets the rhythm. Everything else is downstream.&rdquo;</>}
+                    bn={<>&ldquo;কুরআন ছন্দ ঠিক করে দেয় — বাকি সবকিছু এর পরে।&rdquo;</>}
+                  />
                 </p>
               </div>
             </div>
@@ -85,11 +90,16 @@ export function MadrasahPreview() {
                     <div className="w-12 h-12 rounded-full grid place-items-center bg-emerald/10 text-emerald group-hover:bg-emerald group-hover:text-paper transition-colors">
                       <Icon size={18} />
                     </div>
-                    <span className="numeral text-xs text-ink-muted">{d.ages}</span>
+                    <span className="text-xs text-ink-muted">
+                      <L en={d.ages} bn={d.agesBn} />
+                    </span>
                   </div>
-                  <h3 className="font-display text-2xl tracking-tight">{d.name}</h3>
-                  <p className="font-bn text-emerald text-sm mt-0.5">{d.nameBn}</p>
-                  <p className="text-sm text-ink-soft mt-4 leading-relaxed">{d.summary}</p>
+                  <h3 className="font-display text-2xl tracking-tight">
+                    <L en={d.name} bn={d.nameBn} />
+                  </h3>
+                  <p className="text-sm text-ink-soft mt-4 leading-relaxed">
+                    <L en={d.summary} bn={d.summaryBn} />
+                  </p>
                 </div>
               </StaggerItem>
             );

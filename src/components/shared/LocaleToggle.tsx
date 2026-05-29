@@ -1,10 +1,34 @@
 "use client";
 
+import { useRouter, usePathname } from "next/navigation";
 import { useLocale } from "@/components/providers/LocaleProvider";
 import { cn } from "@/lib/utils";
 
+/**
+ * Locale switcher.
+ *
+ * Toggles between Bengali (default at /) and English (/en/*).
+ * Switching navigates the URL itself — /en is a real, shareable URL —
+ * and the middleware sets the locale cookie on every visit so the
+ * choice persists across navigations.
+ */
 export function LocaleToggle({ className }: { className?: string }) {
-  const { locale, setLocale } = useLocale();
+  const router = useRouter();
+  const pathname = usePathname() ?? "/";
+  const { locale } = useLocale();
+
+  // Compute the URL path stripped of any /en prefix.
+  const stripped = pathname.replace(/^\/en(\/|$)/, "/");
+
+  const goBn = () => {
+    const target = stripped === "" ? "/" : stripped;
+    router.push(target);
+  };
+
+  const goEn = () => {
+    const target = stripped === "/" ? "/en" : `/en${stripped}`;
+    router.push(target);
+  };
 
   return (
     <div
@@ -17,7 +41,7 @@ export function LocaleToggle({ className }: { className?: string }) {
     >
       <button
         type="button"
-        onClick={() => setLocale("bn")}
+        onClick={goBn}
         aria-pressed={locale === "bn"}
         className={cn(
           "px-3 py-1 rounded-full transition-colors",
@@ -30,7 +54,7 @@ export function LocaleToggle({ className }: { className?: string }) {
       </button>
       <button
         type="button"
-        onClick={() => setLocale("en")}
+        onClick={goEn}
         aria-pressed={locale === "en"}
         className={cn(
           "px-3 py-1 rounded-full transition-colors",
